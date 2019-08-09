@@ -70,7 +70,7 @@ namespace Settings
 		//
 		__max = 8
 	};
-	static Currencies::CurrencySymbol default_displayCurrencySymbol = Currencies::CurrencySymbolFrom(Currencies::Currency::XMR);
+	static Currencies::CurrencySymbol default_displayCurrencySymbol = Currencies::CurrencySymbolFrom(Currencies::Currency::XWP);
 	static bool default_authentication__requireWhenSending = true;
 	static bool default_authentication__requireToShowWalletSecrets = true;
 	static bool default_authentication__tryBiometric = true;

@@ -52,18 +52,18 @@ namespace Wallets
 	//
 	enum Currency
 	{
-		Monero = 0
+		Swap = 0
 	};
 	//
-	static string  _ccy_symbol_string__xmr = "xmr";
+	static string  _ccy_symbol_string__xmr = "xwp";
 	static inline const string &symbol_string_from(Wallets::Currency currency)
 	{
 		switch (currency) {
-			case Monero:
+			case Swap:
 				return _ccy_symbol_string__xmr;
 			default:
 				BOOST_THROW_EXCEPTION(logic_error("Unhandled Wallets::Currency"));
-				return symbol_string_from(Monero); // default … not rea
+				return symbol_string_from(Swap); // default … not rea
 		}
 	}
 	static inline const string &jsonRepresentation(Wallets::Currency currency)
@@ -72,20 +72,20 @@ namespace Wallets
 	}
 	static inline const Currency currencyFromJSONRepresentation(const string &str)
 	{
-		if (str == jsonRepresentation(Monero)) {
-			return Monero;
+		if (str == jsonRepresentation(Swap)) {
+			return Swap;
 		}
 		BOOST_THROW_EXCEPTION(logic_error("currencyFromJSONRepresentation: Unhandled jsonRepresentation"));
-		return Monero; // default … not rea
+		return Swap; // default … not rea
 	}
 	static inline string humanReadableCurrencySymbolString(Wallets::Currency currency)
 	{
 		switch (currency) {
-			case Monero:
-				return "XMR";
+			case Swap:
+				return "XWP";
 			default:
 				BOOST_THROW_EXCEPTION(logic_error("Unhandled Wallets::Currency"));
-				return humanReadableCurrencySymbolString(Monero); // default … not rea
+				return humanReadableCurrencySymbolString(Swap); // default … not rea
 		}
 	}
 }
@@ -256,7 +256,7 @@ namespace Wallets
 		_ccyConversionRatesController(ccyConversionRatesController),
 		_generatedOnInit_walletDescription(ifGeneratingNewWallet_walletDescription)
 		{
-			_currency = Wallets::Currency::Monero;
+			_currency = Wallets::Currency::Swap;
 			if (_generatedOnInit_walletDescription != none) {
 				_mnemonic_wordsetName = (*_generatedOnInit_walletDescription).mnemonic_language;
 			}

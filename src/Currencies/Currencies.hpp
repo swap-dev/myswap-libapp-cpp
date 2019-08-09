@@ -220,7 +220,7 @@ namespace Currencies
 	enum Currency
 	{
 		none,
-		XMR,
+		XWP,
 		USD,
 		AUD,
 		BRL,
@@ -247,8 +247,8 @@ namespace Currencies
 		switch (ccy) {
 			case Currency::none:
 				return "";
-			case XMR:
-				return "XMR";
+			case XWP:
+				return "XWP";
 			case USD:
 				return "USD";
 			case AUD:
@@ -301,8 +301,8 @@ namespace Currencies
 	{
 		if (symbol == "") {
 			return Currency::none;
-		} else if (symbol == CurrencySymbolFrom(XMR)) {
-			return XMR;
+		} else if (symbol == CurrencySymbolFrom(XWP)) {
+			return XWP;
 		} else if (symbol == CurrencySymbolFrom(USD)) {
 			return USD;
 		} else if (symbol == CurrencySymbolFrom(AUD)) {
@@ -349,7 +349,7 @@ namespace Currencies
 	}
 	inline size_t unitsForDisplay(Currency ccy)
 	{
-		if (ccy == Currency::XMR) {
+		if (ccy == Currency::XWP) {
 			return MoneroConstants::currency_unitPlaces;
 		}
 		return 2;
@@ -376,7 +376,7 @@ namespace Currencies
 		// Accessors
 		bool isRateReady(Currency currency) const
 		{
-			if (currency == Currency::none || currency == Currency::XMR)
+			if (currency == Currency::none || currency == Currency::XWP)
 			{
 				BOOST_THROW_EXCEPTION(logic_error("Invalid 'currency' argument value"));
 			}
@@ -386,7 +386,7 @@ namespace Currencies
 		}
 		optional<CcyConversion_Rate> rateFromXMR_orNoneIfNotReady(Currency toCurrency) const
 		{
-			if (toCurrency == Currency::none || toCurrency == Currency::XMR) {
+			if (toCurrency == Currency::none || toCurrency == Currency::XWP) {
 				BOOST_THROW_EXCEPTION(logic_error("Invalid 'currency' argument value"));
 			}
 			auto it = xmrToCurrencyRatesByCurrencyUID.find(CurrencyUIDFrom(toCurrency));
@@ -470,8 +470,8 @@ namespace Currencies
 		double final_amountDouble,
 		Currencies::Currency inCcy
 	) {
-		if (inCcy == Currencies::XMR) {
-			BOOST_THROW_EXCEPTION(logic_error("nonAtomicCurrency_localized_formattedString should not be called with ccy of XMR"));
+		if (inCcy == Currencies::XWP) {
+			BOOST_THROW_EXCEPTION(logic_error("nonAtomicCurrency_localized_formattedString should not be called with ccy of XWP"));
 			return "";
 		}
 		string decimalSeparator; decimalSeparator.push_back(money_decimal_punctuation_char());
@@ -531,7 +531,7 @@ namespace Currencies
 			return none;
 		}
 		double moneroAmountDouble = doubleFrom(moneroAmount);
-		if (inCcy == Currencies::XMR) {
+		if (inCcy == Currencies::XWP) {
 			return moneroAmountDouble; // no conversion necessary
 		}
 		optional<double> xmrToCurrencyRate = controller.rateFromXMR_orNoneIfNotReady(inCcy);
